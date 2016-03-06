@@ -1,3 +1,0 @@
-There are lots of Dota 2 statistics analyzed by many different websites such as dotabuff.com and dotamax.com, but there lack info visualization for them.
-
-Statistics can be gathered from http://dev.dota2.com/showthread.php?t=47115 and interesting visualizations can be created.
