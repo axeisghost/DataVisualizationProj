@@ -8,6 +8,7 @@
 
 <!-- JavaScript Libraries //-->
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="fisheye.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -18,17 +19,26 @@
 </head>
 
 <body>
-  <div>
-    <div id="winRateSlider" style="width: 50%">
-      
-    </div><span>omg</span>
-  </div>
-  <div id="frequencySlider" style="width: 50%">
-    
+  <div align="center">
+    <div>
+      <label for="winRateSlider" id="winRateText"> </label>
+      <input type="checkbox" id="activateWinRateFilter" onchange="filterChanged()">Disable</input>
+      <br/>
+      <div id="winRateSlider" style="width: 50%">
+        
+      </div>
+    </div>
+    <div>
+      <label for="frequencySlider" id="frequencyText"> </label>
+      <input type="checkbox" id="activateFrequencyFilter" onchange="filterChanged()">Disable</input>
+      <div id="frequencySlider" style="width: 50%">
+        
+      </div>
+    </div>
   </div>
   <div align="center" id="circle"></div>
 <script>
 d3.json("graphData.json", drawGraph);
 </script>
 </body>
-</html>
+</html>ß
