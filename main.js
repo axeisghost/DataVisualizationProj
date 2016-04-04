@@ -204,7 +204,6 @@ function drawNodes(nodes) {
         });
 }
 
-// Draws straight edges between nodes
 function drawLinks(links) {
     linksRef = d3.select("#plot").selectAll(".link")
         .data(links)
