@@ -49,14 +49,14 @@ b {
     fill: none;
     stroke: red;
     stroke-width: 1px;
-    stroke-opacity: 0.5;
+    stroke-opacity: 1;
 }
 
 .link.unselected {
     fill: none;
     stroke: #888888;
     stroke-width: 1px;
-    stroke-opacity: 0.5;
+    stroke-opacity: 0.8;
 }
 
 .highlight {

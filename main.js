@@ -197,7 +197,7 @@ function drawNodes(nodes) {
           } else {
             tempRef.attr("clicked", "false");
             tempRef.style("fill", "rgb(31,119,180)");
-            d3.selectAll(".tooltip.anchored").attr("class", "tooltip hovered").attr("anchored", "false");
+            d3.selectAll(".tooltip").attr("class", "tooltip unhovered").attr("anchored", "false");
             linksRef.attr("class", function(f) {
               if (f.source == d || f.target == d) {
                 return "link unselected";
@@ -210,8 +210,11 @@ function drawNodes(nodes) {
           }
           if (selectedHeroes.length == 2) {
             selectedHeroes.forEach(function(each) {
-              d3.select("#" + "nodeNo" + each.id).style("fill", "rgb(31,119,180)");
+              d3.select("#" + "nodeNo" + each.id).style("fill", "rgb(31,119,180)")
+              .attr("clicked","false");
             });
+            linksRef.attr("class", "link unselected");
+            d3.selectAll(".tooltip").attr("class", "tooltip unhovered").attr("anchored", "false");
             console.log(selectedHeroes);
             selectedHeroes.length = 0;
           }
