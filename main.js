@@ -289,6 +289,7 @@ function filterChanged() {
     })
     d3.select("#" + "tooltipnodeNo" + each.id).attr("class", "tooltip anchored").attr("anchored", "true");
   });
+  d3.selectAll(".link.selected").style("stroke", "red");
 }
 
 function edgeKey(d) {
