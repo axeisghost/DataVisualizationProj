@@ -1,0 +1,46 @@
+<!-- python -m SimpleHTTPServer 8080 //-->
+<!-- http://bl.ocks.org/mbostock/4062045 //-->
+
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>D3 Graph Visualization Demo</title>
+
+<!-- JavaScript Libraries //-->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="fisheye.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="main.js"></script>
+<script type="text/javascript" src="d3.geom.js"></script>
+<script type="text/javascript" src="d3.layout.js"></script>
+<!-- CSS Style //-->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900|Source+Code+Pro:300" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div align="center">
+    <div>
+      <label for="winRateSlider" id="winRateText"> </label>
+      <input type="checkbox" id="activateWinRateFilter" onchange="filterChanged()">Disable</input>
+      <br/>
+      <div id="winRateSlider" style="width: 50%">
+        
+      </div>
+    </div>
+    <div>
+      <label for="frequencySlider" id="frequencyText"> </label>
+      <input type="checkbox" id="activateFrequencyFilter" onchange="filterChanged()">Disable</input>
+      <div id="frequencySlider" style="width: 50%">
+        
+      </div>
+    </div>
+  </div>
+  <div align="center" id="circle"></div>
+<script>
+d3.json("graphData.json", drawGraph);
+</script>
+</body>
+</html>
