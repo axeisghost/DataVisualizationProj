@@ -3,7 +3,7 @@ var twoCombo = []
 var threeCombo = []
 var hero_list = []
 var leftOffset = 80;
-var topOffset = 50;
+var topOffset = 120;
 var barsize = 60;
 var firstImgLeftOffset = 50;
 var secondImgLeftOffset = 350;
@@ -157,6 +157,7 @@ function drawThreeHeroRanking() {
 		ranking.style.top = imgTopOffset + "px";
 		ranking.style.left = "2%";
 		document.getElementById("rotk" + i).appendChild(ranking);
+		document.getElementById("rotk" + i).style.width = "500px";
 
 		//first hero
 		var firstHeroName = hero_list[firstHeroID]["name"];
@@ -206,6 +207,3 @@ function drawThreeHeroRanking() {
 		});
 	}
 }
-// $.getJSON("myData/tempt.json", function(json) {
-//     console.log(json); // this will show the info it in firebug console
-// });
