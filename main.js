@@ -262,17 +262,19 @@ function drawTree() {
   svg.attr('display', 'none').transition().delay(500);
   firstid = selectedHeroes[0]['id'];
   secondid = selectedHeroes[1]['id'];
+  firstid++;
+  secondid++;
   if (firstid > 23) {
-    firstid +=2;
+    firstid ++;
   }
   if (firstid > 107) {
-    firstid +=1;
+    firstid ++;
   }
   if (secondid > 23) {
-    secondid +=2;
+    secondid ++;
   }
   if (secondid > 107) {
-    secondid +=1;
+    secondid ++;
   }
   var query = [firstid, secondid];
   query = '[' + query.sort().join(', ') +']';
@@ -283,33 +285,62 @@ function drawTree() {
         .attr("height", 900)
         .attr("align", "center")
         .attr("id", "treePlotingCanvas");
-  d3.json("treedata.json", function(data) {
+  d3.json("treedata.json", function(error, data) {
+    if (error) {return console.warn(error);}
     var children = data[query]['children'];
-    drawTreeNodes(query, children);
+    drawTreeNodes(firstid, secondid, children);
   });
 
 }
-function drawTreeNodes(root, children) {
-  console.log(root)
+function drawTreeNodes(firstid, secondid, children) {
   console.log(children)
-  console.log(svgtree)
-  treenode = svgtree.append('g').attr('transform','translate(450,450)');
-  treenode.append('circle')
+
+  var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoom);
+
+  var childrenArr = Object.keys(children).map(function(k) {return children[k];});
+  treeplot = svgtree.append('g').call(zoom).append('g').attr('id', 'treeplot').attr('transform','translate(450,450)');
+  treelink = d3.select('#treeplot').selectAll('.treelink')
+    .data(childrenArr)
+    .enter().append('line')
+    .attr('x1', 0).attr('y1', 0)
+    .attr('x2', function(d, i) {
+        var alpha = (i/childrenArr.length) * 2 * Math.PI;
+        var r = 1/d['combination_rate'] * 2;
+        return r * Math.sin(alpha);
+      })
+    .attr('y2', function(d, i) {
+        var alpha = (i/childrenArr.length) * 2 * Math.PI;
+        var r = 1/d['combination_rate'] * 2;
+        return r * Math.cos(alpha);
+      })
+    .attr('stroke-width', 0.5)
+    .attr('stroke', 'black');
+  rootnode = d3.select('#treeplot')
+    .append('circle')
     .attr('cx', 0)
     .attr('cy', 0)
-    .attr('r', 20)
+    .attr('r', 5)
     .attr('fill', 'steelblue')
     .append('text')
-    .text(function(d) {return root});
-  treenode.data(children)
+    .text(function(d) {return 'a';});
+  treenode = d3.select('#treeplot').selectAll('.treenode')
+      .data(childrenArr)
       .enter().append('circle')
       .attr('class', 'treenode')
-      //.attr('id', function(d) {return Object.keys[d];})
-      //.attr('angle', function(d) {return (Object.keys[d]/children.length)*360;})
-      .attr('r', function(d) {return d['win_rate'] / 3;})
-      .attr('cx', function(d, i) {return i * 30;})
-      .attr('cy', function(d, i) {return i * 30;})
+      .attr('r', function(d) {
+        return d['win_rate'] / 10;})
+      .attr('cx', function(d, i) {
+        var alpha = (i/childrenArr.length) * 2 * Math.PI;
+        var r = 1/d['combination_rate'] * 2;
+        return r * Math.sin(alpha);
+      })
+      .attr('cy', function(d, i) {
+        var alpha = (i/childrenArr.length) * 2 * Math.PI;
+        var r = 1/d['combination_rate'] * 2;
+        return r * Math.cos(alpha);
+      })
       .attr('fill', 'red');
+      
 }
 
 function filterChanged() {
