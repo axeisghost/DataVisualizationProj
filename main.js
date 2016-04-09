@@ -286,7 +286,10 @@ function drawTree() {
         .attr("align", "center")
         .attr("id", "treePlotingCanvas");
   d3.json("treedata.json", function(error, data) {
-    if (error) {return console.warn(error);}
+    if (error || !data[query]) {
+      var r = confirm("Sorry we have no data available for selected heroes. Click ok to refresh");
+      if (r) {location.reload();}
+    }
     var children = data[query]['children'];
     drawTreeNodes(firstid, secondid, children);
   });
@@ -302,6 +305,7 @@ function drawTreeNodes(firstid, secondid, children) {
   treelink = d3.select('#treeplot').selectAll('.treelink')
     .data(childrenArr)
     .enter().append('line')
+    .attr('id', function(d, i) {return 'treelink' + i})
     .attr('x1', 0).attr('y1', 0)
     .attr('x2', function(d, i) {
         var alpha = (i/childrenArr.length) * 2 * Math.PI;
@@ -313,19 +317,29 @@ function drawTreeNodes(firstid, secondid, children) {
         var r = 1/d['combination_rate'] * 2;
         return r * Math.cos(alpha);
       })
-    .attr('stroke-width', 0.5)
-    .attr('stroke', 'black');
+    .attr('stroke-width', 3)
+    .attr('stroke', 'black')
+    .attr('opacity', 0)
+    .on('mouseover', function(d, i) {
+      d3.select(this).attr('opacity', 10).attr('stroke-width', 1).attr('stroke', 'red');
+      d3.select('#treenode' + i).attr('r', function(d) {return d['win_rate'] / 9})
+        .attr('fill', 'steelblue');
+    })
+    .on('mouseout', function(d, i) {
+      d3.select(this).attr('opacity', 0);
+      d3.select('#treenode' + i).attr('r', function(d) {return d['win_rate'] / 10})
+        .attr('fill', 'red');
+    });
   rootnode = d3.select('#treeplot')
     .append('circle')
     .attr('cx', 0)
     .attr('cy', 0)
     .attr('r', 5)
-    .attr('fill', 'steelblue')
-    .append('text')
-    .text(function(d) {return 'a';});
+    .attr('fill', 'steelblue');
   treenode = d3.select('#treeplot').selectAll('.treenode')
       .data(childrenArr)
       .enter().append('circle')
+      .attr('id', function(d, i) {return 'treenode' + i})
       .attr('class', 'treenode')
       .attr('r', function(d) {
         return d['win_rate'] / 10;})
@@ -339,7 +353,23 @@ function drawTreeNodes(firstid, secondid, children) {
         var r = 1/d['combination_rate'] * 2;
         return r * Math.cos(alpha);
       })
-      .attr('fill', 'red');
+      .attr('fill', 'red')
+      .on('mouseover', function(d, i) {
+        //console.log(this);
+        //console.log(this['id']);
+        var id = this['id'];
+        var link = treelink[id];
+        //console.log(id, link);
+        d3.select(this).attr('r', function(d) {
+          return d['win_rate']/9;
+        }).attr('fill', 'steelblue');
+        d3.select('#treelink' + i).attr('opacity', 10).attr('stroke-width', 1).attr('stroke', 'red');
+      })
+      .on('mouseout', function(d, i) {
+        d3.select(this).attr('r', function(d) {return d['win_rate'] / 10})
+          .attr('fill', 'red');
+        d3.select('#treelink' + i).attr('opacity', 0);
+      })
       
 }
 
