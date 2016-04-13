@@ -72,6 +72,7 @@ function addTooltip(circle) {
 
 // Draws an arc diagram for the provided undirected graph
 function drawGraph(graph) {
+    d3.select('#backButton').style('display', 'none');
     // create svg image
     svg  = d3.select("body").select("#circle")
         .append("svg")
@@ -294,6 +295,7 @@ var treeTooltip = d3.select('body').append('div')
                     .style('opacity', 0);
 
 function drawTree() {
+  d3.select('#backButton').style('display', 'block');
   svg.attr('display', 'none').transition().delay(500);
   firstid = selectedHeroes[0]['id'];
   secondid = selectedHeroes[1]['id'];
