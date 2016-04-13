@@ -296,6 +296,23 @@ var treeTooltip = d3.select('body').append('div')
                     .style('opacity', 0);
 
 function drawTree() {
+  var legend = new Array(9);
+  svglegend = d3.select('#legend').append('svg')
+    .attr('width', 900)
+    .attr('height', 100)
+    .attr('align', 'center')
+    .append('g').selectAll('.rect')
+    .data(legend)
+    .enter()
+    .append('rect')
+    .attr('width', 20)
+    .attr('height', 20)
+    .attr('fill', function(d, i) {
+      return treeColor[i];
+    })
+    .attr('transform', function(d, i) {
+      return 'translate(' + (i*20 + 370) + ', 0)';
+    });
   d3.select('#backButton').style('display', 'block');
   svg.attr('display', 'none').transition().delay(500);
   firstid = selectedHeroes[0]['id'];
@@ -394,7 +411,6 @@ function drawTreeNodes(firstid, secondid, children) {
       })
       .attr('fill', function(d, i) {
         index = Math.floor(d['win_rate']/100 * 8);
-        console.log(index);
         return treeColor[index];
       })
       //.attr('fill', 'red')
