@@ -297,9 +297,9 @@ var treeTooltip = d3.select('body').append('div')
 
 function drawTree() {
   var legend = new Array(9);
-  svglegend = d3.select('#legend').append('svg')
+  var svglegend = d3.select('#legend').append('svg')
     .attr('width', 900)
-    .attr('height', 100)
+    .attr('height', 60)
     .attr('align', 'center')
     .append('g').selectAll('.rect')
     .data(legend)
@@ -313,6 +313,16 @@ function drawTree() {
     .attr('transform', function(d, i) {
       return 'translate(' + (i*20 + 370) + ', 0)';
     });
+  d3.select('#legend').select('svg')
+    .append('text')
+    .attr('x', 330)
+    .attr('y', 40)
+    .text('Winrate: 0%');
+  d3.select('#legend').select('svg')
+    .append('text')
+    .attr('x', 550)
+    .attr('y', 40)
+    .text('100%');
   d3.select('#backButton').style('display', 'block');
   svg.attr('display', 'none').transition().delay(500);
   firstid = selectedHeroes[0]['id'];
