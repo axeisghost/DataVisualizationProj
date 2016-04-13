@@ -12,6 +12,7 @@ var linksRef;
 var nodesDataRef;
 var treenode;
 
+var treeColor = ['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#006d2c','#00441b'];
 var svg;
 var svgtree;
 
@@ -332,6 +333,9 @@ function drawTree() {
   });
 
 }
+function zoom() {
+  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
 function drawTreeNodes(firstid, secondid, children) {
   console.log(children)
 
@@ -388,7 +392,12 @@ function drawTreeNodes(firstid, secondid, children) {
         var r = 1/d['combination_rate'] * 2;
         return r * Math.cos(alpha);
       })
-      .attr('fill', 'red')
+      .attr('fill', function(d, i) {
+        index = Math.floor(d['win_rate']/100 * 8);
+        console.log(index);
+        return treeColor[index];
+      })
+      //.attr('fill', 'red')
       .on('mouseover', function(d, i) {
         treeTooltip.style('opacity', 1);
         console.log(herolist[i]['localized_name']);
@@ -403,7 +412,11 @@ function drawTreeNodes(firstid, secondid, children) {
       })
       .on('mouseout', function(d, i) {
         d3.select(this).transition().duration(500).attr('r', function(d) {return d['win_rate'] / 10})
-          .attr('fill', 'red');
+          .attr('fill', function(d, i) {
+            index = Math.floor(d['win_rate']/100 * 8);
+            console.log(index);
+            return treeColor[index];
+          });
         d3.select('#treelink' + i).transition().duration(300).attr('opacity', 0);
       })
       .on('click', function(d, i) {
@@ -434,6 +447,22 @@ function filterChanged() {
     d.adjacentEdges = [];
     d.adjacentNodes = [];
   });
+
+  d3.select('#treeplot').selectAll('.treenode')
+    .style('opacity', function(d) {
+      if (!disableFilterWinRate) {
+        if (d['win_rate'] < lowWin || d['win_rate'] > highWin) {
+          return 0;
+        }
+      }
+      if (!disableFilterFrequency) {
+        if (d['combination_rate'] < lowFreq || d['combination_rate'] > highFreq) {
+          return 0;
+        }
+      }
+      return 1;
+    });
+
   linksRef
   .style("opacity", function(d) {
     if (!disableFilterWinRate) {
@@ -505,8 +534,8 @@ $(function() {
   $( "#winRateSlider" ).slider(
     {
       range: true,
-      min: 50,
-      max: 80,
+      min: 0,
+      max: 100,
       values: [initLowWin, initHighWin],
       width: "50%",
       slide: function(e, ui) {
@@ -518,8 +547,8 @@ $(function() {
   $( "#frequencySlider" ).slider(
     {
       range: true,
-      min: 10,
-      max: 70,
+      min: 0,
+      max: 100,
       values: [initLowFreq, initHighFreq],
       width: "50%",
       slide: function(e, ui) {
