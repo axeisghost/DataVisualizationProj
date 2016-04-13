@@ -20,6 +20,33 @@ var fisheye = d3.fisheye.circular()
     .distortion(4);
 var selectedHeroes = [];
 var selectedOne = false;
+
+var herolist;
+d3.json("herolist.json", function(data) {
+    listHero(data['heroes']);
+});
+
+function listHero(data) {
+  herolist = Object.keys(data).map(function(k) {return data[k];});
+}
+
+// function onReady(callback) {
+//   var intervalID = window.setInterval(checkReady, 10);
+//   function checkReady() {
+//     if (document.getElementsByTagName('body')[1] != undefined) {
+//       window.clearInterval(intervalID);
+//       callback.call(this);
+//     }
+//   }
+// }
+// function show(id, value) {
+//   document.getElementById(id).style.dipslay = value ? 'block' : 'none';
+// }
+// onReady(function() {
+//   show('circle', false);
+//   show('loading', true);
+// });
+
 // Generates a tooltip for a SVG circle element based on its ID
 function addTooltip(circle) {
     var x = parseFloat(circle.attr("cx"));
@@ -229,7 +256,7 @@ function drawNodes(nodes) {
             d3.selectAll(".tooltip").attr("class", "tooltip unhovered").attr("anchored", "false");
             console.log(selectedHeroes);
             drawTree();
-            //selectedHeroes.length = 0;
+            selectedHeroes.length = 0;
           }
         });
         nodesRef.each(function(d, i) {
@@ -257,6 +284,14 @@ function drawLinks(links) {
           return "1px";
         });
 }
+
+function back() {
+  location.reload();
+}
+
+var treeTooltip = d3.select('body').append('div')
+                    .attr('class', 'treeTooltip')
+                    .style('opacity', 0);
 
 function drawTree() {
   svg.attr('display', 'none').transition().delay(500);
@@ -317,19 +352,17 @@ function drawTreeNodes(firstid, secondid, children) {
         var r = 1/d['combination_rate'] * 2;
         return r * Math.cos(alpha);
       })
-    .attr('stroke-width', 3)
-    .attr('stroke', 'black')
-    .attr('opacity', 0)
-    .on('mouseover', function(d, i) {
-      d3.select(this).attr('opacity', 10).attr('stroke-width', 1).attr('stroke', 'red');
-      d3.select('#treenode' + i).attr('r', function(d) {return d['win_rate'] / 9})
-        .attr('fill', 'steelblue');
-    })
-    .on('mouseout', function(d, i) {
-      d3.select(this).attr('opacity', 0);
-      d3.select('#treenode' + i).attr('r', function(d) {return d['win_rate'] / 10})
-        .attr('fill', 'red');
-    });
+    .attr('opacity', 0);
+    // .on('mouseover', function(d, i) {
+    //   d3.select(this).attr('opacity', 10).attr('stroke-width', 1).attr('stroke', 'red');
+    //   d3.select('#treenode' + i).attr('r', function(d) {return d['win_rate'] / 9})
+    //     .attr('fill', 'steelblue');
+    // })
+    // .on('mouseout', function(d, i) {
+    //   d3.select(this).attr('opacity', 0);
+    //   d3.select('#treenode' + i).attr('r', function(d) {return d['win_rate'] / 10})
+    //     .attr('fill', 'red');
+    //});
   rootnode = d3.select('#treeplot')
     .append('circle')
     .attr('cx', 0)
@@ -355,22 +388,36 @@ function drawTreeNodes(firstid, secondid, children) {
       })
       .attr('fill', 'red')
       .on('mouseover', function(d, i) {
-        //console.log(this);
-        //console.log(this['id']);
-        var id = this['id'];
-        var link = treelink[id];
-        //console.log(id, link);
-        d3.select(this).attr('r', function(d) {
-          return d['win_rate']/9;
+        treeTooltip.style('opacity', 1);
+        console.log(herolist[i]['localized_name']);
+        treeTooltip.html('Hero Name: ' + herolist[i]['localized_name'])
+                   .style('left', d3.event.pageX + 5 + 'px')
+                   .style('top', d3.event.pageY + 5 + 'px');
+        console.log(treeTooltip);
+        d3.select(this).transition().duration(300).attr('r', function(d) {
+          return d['win_rate']/7;
         }).attr('fill', 'steelblue');
-        d3.select('#treelink' + i).attr('opacity', 10).attr('stroke-width', 1).attr('stroke', 'red');
+        d3.select('#treelink' + i).transition().duration(300).attr('opacity', 10).attr('stroke-width', 3).attr('stroke', 'steelblue');
       })
       .on('mouseout', function(d, i) {
-        d3.select(this).attr('r', function(d) {return d['win_rate'] / 10})
+        d3.select(this).transition().duration(500).attr('r', function(d) {return d['win_rate'] / 10})
           .attr('fill', 'red');
-        d3.select('#treelink' + i).attr('opacity', 0);
+        d3.select('#treelink' + i).transition().duration(300).attr('opacity', 0);
       })
-      
+      .on('click', function(d, i) {
+        var index = i + 1;
+        if (i > 23) {index++;}
+        if (i > 107) {index++;}
+        //console.log(herolist);
+        var newHero = {};
+        newHero['id'] = index;
+        newHero['name'] = herolist[i]['localized_name'];
+        console.log(newHero);
+        selectedHeroes.push(newHero);
+        //somefunction(selectedHeroes);
+        selectedHeroes.splice(-1, 1);
+        console.log(selectedHeroes);
+      });
 }
 
 function filterChanged() {

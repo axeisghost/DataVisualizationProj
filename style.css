@@ -7,6 +7,17 @@ b {
     font-weight: 900;
 }
 
+.treeTooltip {
+    background: #fff;
+    color: #202020;
+    border-radius: 5px;
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+    text-align: left;
+    opacity: .25;
+}
+
 .outline {
     fill: none;
     stroke: #888888;
@@ -64,3 +75,20 @@ b {
     stroke-width: 4px;
     stroke-opacity: 1.0;
 }
+
+/*#circle {
+    display: none;
+}
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url('https://49.media.tumblr.com/62e9b72d4ed22659378e4bba646d9a50/tumblr_nuud6qWOAF1qi8ssho1_400.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+}*/

@@ -39,8 +39,15 @@
     </div>
   </div>
   <div align="center" id="circle"></div>
+  <div align="center" id='backButton'>
+    <input name='backButton'
+           type='button'
+           value='Back'
+           onclick='back()'/>
+  </div>
 <script>
 d3.json("graphData.json", drawGraph);
 </script>
+<!-- <div id="loading"></div> -->
 </body>
 </html>
