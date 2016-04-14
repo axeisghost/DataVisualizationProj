@@ -2,11 +2,11 @@
 var twoCombo = []
 var threeCombo = []
 var hero_list = []
-var leftOffset = 80;
+var leftOffset = 850;
 var topOffset = 120;
 var barsize = 60;
 var firstImgLeftOffset = 50;
-var secondImgLeftOffset = 350;
+var secondImgLeftOffset = 250;
 var firtPos = 50;
 var secPos = 150;
 var thirdPos = 250;
@@ -28,7 +28,7 @@ var datab = $.getJSON("hero_list", function(json) {
 }).done(function(json) {
 	hero_list = datab["responseJSON"]["result"]["heroes"];
 });
-  // var json = require('/myData/tempt.json');
+  // var json = require('/myData/tempt.json't);
 
 
 function drawTwoHeroRanking() {
@@ -42,7 +42,7 @@ function drawTwoHeroRanking() {
 		// creating divs for ranking list
 			var current = document.createElement("div");
 			current.id = "rotk" + i;
-			current.style.width = "500px";
+			current.style.width = "400px";
 			current.style.position = 'absolute';
 			current.style.left = leftOffset + "px";
 			current.style.top = barsize * i + topOffset + "px";
@@ -157,7 +157,7 @@ function drawThreeHeroRanking() {
 		ranking.style.top = imgTopOffset + "px";
 		ranking.style.left = "2%";
 		document.getElementById("rotk" + i).appendChild(ranking);
-		document.getElementById("rotk" + i).style.width = "500px";
+		document.getElementById("rotk" + i).style.width = "400px";
 
 		//first hero
 		var firstHeroName = hero_list[firstHeroID]["name"];
