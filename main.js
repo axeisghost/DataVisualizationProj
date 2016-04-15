@@ -300,7 +300,6 @@ function drawTree() {
   var svglegend = d3.select('#legend').append('svg')
     .attr('width', 900)
     .attr('height', 60)
-    .attr('align', 'center')
     .append('g').selectAll('.rect')
     .data(legend)
     .enter()
@@ -346,9 +345,8 @@ function drawTree() {
   console.log(query);
   svgtree  = d3.select("body").select('#circle')
         .append("svg")
-        .attr("width", 900)
+        .attr("width", 1600)
         .attr("height", 900)
-        .attr("align", "center")
         .attr("id", "treePlotingCanvas");
   d3.json("treedata.json", function(error, data) {
     if (error || !data[query]) {
