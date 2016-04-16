@@ -1,8 +1,7 @@
-
 var twoCombo = []
 var threeCombo = []
 var hero_list = []
-var leftOffset = 850;
+var leftOffset = 950;
 var topOffset = 120;
 var barsize = 60;
 var firstImgLeftOffset = 50;

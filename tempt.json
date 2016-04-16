@@ -1,0 +1,26 @@
+{
+"threeCombo": [
+{"first_hero_ID":6, "second_hero_ID":21, "third_hero_ID":65, "win_rate":75.0, "frequency":0.34558383731, "games":104},
+{"first_hero_ID":21, "second_hero_ID":26, "third_hero_ID":65, "win_rate":75.0, "frequency":0.292417093108, "games":88},
+{"first_hero_ID":21, "second_hero_ID":60, "third_hero_ID":65, "win_rate":75.0, "frequency":0.225958662856, "games":68},
+{"first_hero_ID":20, "second_hero_ID":21, "third_hero_ID":65, "win_rate":75.0, "frequency":0.279125407058, "games":84},
+{"first_hero_ID":6, "second_hero_ID":13, "third_hero_ID":65, "win_rate":75.8620689655, "frequency":0.19272944773, "games":58},
+{"first_hero_ID":7, "second_hero_ID":13, "third_hero_ID":65, "win_rate":75.9259259259, "frequency":0.17943776168, "games":54},
+{"first_hero_ID":21, "second_hero_ID":65, "third_hero_ID":73, "win_rate":78.0, "frequency":0.16614607563, "games":50},
+{"first_hero_ID":21, "second_hero_ID":55, "third_hero_ID":65, "win_rate":78.1818181818, "frequency":0.182760683193, "games":55},
+{"first_hero_ID":8, "second_hero_ID":21, "third_hero_ID":65, "win_rate":79.7101449275, "frequency":0.229281584369, "games":69},
+{"first_hero_ID":55, "second_hero_ID":65, "third_hero_ID":74, "win_rate":82.0, "frequency":0.16614607563, "games":50}
+],
+"twoCombo": [
+{"first_hero_id": 85, "win_games": 93, "second_hero": "Elder Titan", "win_rate": 70.99236641221374, "first_hero": "Undying", "second_hero_id": 103, "combination_games": 131, "combination_rate": 0.04340479109373447},
+{"first_hero_id": 36, "win_games": 645, "second_hero": "Abaddon", "win_rate": 70.72368421052632, "first_hero": "Necrophos", "second_hero_id": 102, "combination_games": 912, "combination_rate": 0.3021768662403499},
+{"first_hero_id": 36, "win_games": 1005, "second_hero": "Omniknight", "win_rate": 70.27972027972028, "first_hero": "Necrophos", "second_hero_id": 57, "combination_games": 1430, "combination_rate": 0.4738080249163381},
+{"first_hero_id": 48, "win_games": 483, "second_hero": "Abaddon", "win_rate": 69.79768786127167, "first_hero": "Luna", "second_hero_id": 102, "combination_games": 692, "combination_rate": 0.22928332394552864},
+{"first_hero_id": 36, "win_games": 3018, "second_hero": "Spectre", "win_rate": 69.76421636615811, "first_hero": "Necrophos", "second_hero_id": 67, "combination_games": 4326, "combination_rate": 1.4333521089427124},
+{"first_hero_id": 22, "win_games": 1905, "second_hero": "Omniknight", "win_rate": 69.0968443960827, "first_hero": "Zeus", "second_hero_id": 57, "combination_games": 2757, "combination_rate": 0.9134886186673735},
+{"first_hero_id": 22, "win_games": 2446, "second_hero": "Necrophos", "win_rate": 68.90140845070422, "first_hero": "Zeus", "second_hero_id": 36, "combination_games": 3550, "combination_rate": 1.1762367052118883},
+{"first_hero_id": 57, "win_games": 2711, "second_hero": "Spectre", "win_rate": 68.84205180294566, "first_hero": "Omniknight", "second_hero_id": 67, "combination_games": 3938, "combination_rate": 1.3047944070773003},
+{"first_hero_id": 67, "win_games": 1709, "second_hero": "Ursa", "win_rate": 68.77263581488934, "first_hero": "Spectre", "second_hero_id": 70, "combination_games": 2485, "combination_rate": 0.8233656936483218},
+{"first_hero_id": 20, "win_games": 671, "second_hero": "Abaddon", "win_rate": 68.75, "first_hero": "Vengeful Spirit", "second_hero_id": 102, "combination_games": 976, "combination_rate": 0.32338226036247975}
+]
+}
