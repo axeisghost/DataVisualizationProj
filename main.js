@@ -125,7 +125,27 @@ function drawTwoHeroRanking() {
 function drawThreeHeroRanking() {
 	var colorID = false;
 	for (var i = 0; i < 10; i++) {
-
+		if (document.getElementById("rotk" + i) == null) {
+			var current = document.createElement("div");
+			current.id = "rotk" + i;
+		
+		// creating divs for ranking list
+			var current = document.createElement("div");
+			current.id = "rotk" + i;
+			current.style.width = "400px";
+			current.style.position = 'absolute';
+			current.style.left = leftOffset + "px";
+			current.style.top = barsize * i + topOffset + "px";
+			current.style.height = "60px";
+			if (colorID == false) {
+				current.style.backgroundColor = '#ccffcc';
+				colorID = true;
+			} else {
+				current.style.backgroundColor = '#ffe6ff';
+				colorID = false;
+			}
+			document.body.appendChild(current);
+		}
 		//clear used image
 		var clearing = document.getElementById("rotk" + i);
 		while (clearing.firstChild) {
