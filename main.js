@@ -55,6 +55,16 @@ function drawTwoHeroRanking() {
 				colorID = false;
 			}
 			document.body.appendChild(current);
+			document.getElementById("rotk" + i).addEventListener('click', function(e) {
+			//add  your node links here
+				alert('hi');
+			});
+			document.getElementById("rotk" + i).addEventListener('mouseover', function(e){
+				this.style.opacity = "0.5";
+			});
+			document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
+				this.style.opacity = "1";
+			});
 		}		//clear used image
 		var clearing = document.getElementById("rotk" + i);
 		while (clearing.firstChild) {
@@ -73,7 +83,6 @@ function drawTwoHeroRanking() {
 			firstHeroID--;
 			secondHeroID--;
 		}
-		console.log(current);
 		//first hero
 		var firstHeroName = hero_list[firstHeroID]["name"];
 		firstHeroName = firstHeroName.substring(14, firstHeroName.length);
@@ -110,16 +119,6 @@ function drawTwoHeroRanking() {
 		document.getElementById("rotk" + i).appendChild(img);
 
 		//mousevents
-		document.getElementById("rotk" + i).addEventListener('click', function(e) {
-			//add  your node links here
-			alert('hi');
-		});
-		document.getElementById("rotk" + i).addEventListener('mouseover', function(e){
-			this.style.opacity = "0.5";
-		});
-		document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
-			this.style.opacity = "1";
-		});
 	}
 }
 function drawThreeHeroRanking() {
@@ -145,6 +144,16 @@ function drawThreeHeroRanking() {
 				colorID = false;
 			}
 			document.body.appendChild(current);
+			document.getElementById("rotk" + i).addEventListener('click', function(e) {
+			//add  your node links here
+				alert('hi');
+			});
+			document.getElementById("rotk" + i).addEventListener('mouseover', function(e){
+				this.style.opacity = "0.5";
+			});
+			document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
+				this.style.opacity = "1";
+			});
 		}
 		//clear used image
 		var clearing = document.getElementById("rotk" + i);
@@ -215,15 +224,6 @@ function drawThreeHeroRanking() {
 		img.src ="http://media.steampowered.com/apps/dota2/images/heroes/" + thirdHeroName + "_lg.png";
 
 		document.getElementById("rotk" + i).appendChild(img);
-		document.getElementById("rotk" + i).addEventListener('click', function(e) {
-			//add  your node links here
-			alert('hi');
-		});
-		document.getElementById("rotk" + i).addEventListener('mouseover', function(e){
-			this.style.opacity = "0.5";
-		});
-		document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
-			this.style.opacity = "1";
-		});
+
 	}
 }
