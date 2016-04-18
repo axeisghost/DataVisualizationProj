@@ -8,14 +8,15 @@
 
 <!-- JavaScript Libraries //-->
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="fisheye.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript"> var rankingDic=[];var selectedHeroes = [];var highlight=[];</script>
 <script src="main.js"></script>
-<!-- <script src='ui/ui.js'></script> -->
-<script type="text/javascript" src="d3.geom.js"></script>
-<script type="text/javascript" src="d3.layout.js"></script>
+<script src="ui/main.js"></script>
 <!-- CSS Style //-->
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900|Source+Code+Pro:300" rel="stylesheet" type="text/css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -40,15 +41,15 @@
     </div>
   </div>
 
-
+  
   <div class="container" id='tabs'>
-  <ul class="nav-tabs" id ="myTab">
-    <li><a href="javascript:drawTwoHeroRanking();" onclick="drawTwoHeroRanking()"><body>Two-heros combo win-rate ranking
-</body></a></li>
-    <li><a href="javascript:drawThreeHeroRanking();" onclick="drawThreeHeroRanking()"><body>Three-heros combo win-rate ranking
-</body></a></li>
-  </ul>
-</div>
+    <ul class="nav nav-tabs" id ="myTab">
+      <li><a href="javascript:drawTwoHeroRanking();" onclick="drawTwoHeroRanking()"><body>Two-heros combo win-rate ranking
+  </body></a></li>
+      <li><a href="javascript:drawThreeHeroRanking();" onclick="drawThreeHeroRanking()"><body>Three-heros combo win-rate ranking
+  </body></a></li>
+    </ul>
+  </div>
 
 
 
@@ -62,8 +63,6 @@
   </div>
 <script>
 d3.json("graphData.json", drawGraph);
-preload();
-drawTwoHeroRanking();
 </script>
 <!-- <div id="loading"></div> -->
 </body>
