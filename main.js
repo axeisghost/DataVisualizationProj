@@ -291,9 +291,6 @@ function back() {
   location.reload();
 }
 
-var treeTooltip = d3.select('body').append('div')
-                    .attr('class', 'treeTooltip')
-                    .style('opacity', 0);
 
 function drawTree() {
   console.log(highlight);
@@ -374,6 +371,8 @@ function zoom() {
 }
 function drawTreeNodes(firstid, secondid, children) {
   console.log(children)
+  var newHero = {};
+  var index;
 
   var childrenArr = Object.keys(children).map(function(k) {return children[k];});
   treeplot = svgtree.append('g').call(d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoom)).append('g').attr('id', 'treeplot').attr('transform','translate(450,450)');
@@ -422,12 +421,7 @@ function drawTreeNodes(firstid, secondid, children) {
       })
       //.attr('fill', 'red')
       .on('mouseover', function(d, i) {
-        treeTooltip.style('opacity', 1);
-        console.log(herolist[i]['localized_name']);
-        treeTooltip.html('Hero Name: ' + herolist[i]['localized_name'])
-                   .style('left', d3.event.pageX + 5 + 'px')
-                   .style('top', d3.event.pageY + 5 + 'px');
-        console.log(treeTooltip);
+        index = i;
         d3.select(this).transition().duration(300).attr('r', function(d) {
           return d['win_rate']/7;
         }).attr('fill', 'steelblue');
@@ -437,7 +431,7 @@ function drawTreeNodes(firstid, secondid, children) {
         d3.select(this).transition().duration(500).attr('r', function(d) {return d['win_rate'] / 10})
           .attr('fill', function(d, i) {
             index = Math.floor(d['win_rate']/100 * 8);
-            console.log(index);
+            //console.log(index);
             return treeColor[index];
           });
         d3.select('#treelink' + i).transition().duration(300).attr('opacity', 0);
@@ -447,14 +441,22 @@ function drawTreeNodes(firstid, secondid, children) {
         if (i > 23) {index++;}
         if (i > 107) {index++;}
         //console.log(herolist);
-        var newHero = {};
         newHero['id'] = index;
         newHero['name'] = herolist[i]['localized_name'];
-        console.log(newHero);
+        //console.log(newHero);
         selectedHeroes.push(newHero);
         //somefunction(selectedHeroes);
         selectedHeroes.splice(-1, 1);
-        console.log(selectedHeroes);
+        //console.log(selectedHeroes);
+      });
+  $('svg circle').tipsy({ 
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+          //console.log(herolist);
+          var c = herolist[index]['localized_name'];
+          return 'Hero Name: ' + c; 
+        }
       });
 }
 
