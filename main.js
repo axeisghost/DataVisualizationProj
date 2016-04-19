@@ -370,9 +370,10 @@ function zoom() {
   svgtree.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 function drawTreeNodes(firstid, secondid, children) {
-  console.log(children)
+  console.log(children, firstid, secondid);
   var newHero = {};
   var index;
+  var heroForRoot = [firstid, secondid].sort();
 
   var childrenArr = Object.keys(children).map(function(k) {return children[k];});
   treeplot = svgtree.append('g').call(d3.behavior.zoom().scaleExtent([1, 8]).on('zoom', zoom)).append('g').attr('id', 'treeplot').attr('transform','translate(450,450)');
@@ -394,6 +395,7 @@ function drawTreeNodes(firstid, secondid, children) {
     .attr('opacity', 0);
   rootnode = d3.select('#treeplot')
     .append('circle')
+    .attr('id', 'rootnode')
     .attr('cx', 0)
     .attr('cy', 0)
     .attr('r', 5)
@@ -449,7 +451,7 @@ function drawTreeNodes(firstid, secondid, children) {
         selectedHeroes.splice(-1, 1);
         //console.log(selectedHeroes);
       });
-  $('svg circle').tipsy({ 
+  $('.treenode').tipsy({ 
         gravity: 'w', 
         html: true, 
         title: function() {
@@ -458,6 +460,30 @@ function drawTreeNodes(firstid, secondid, children) {
           return 'Hero Name: ' + c; 
         }
       });
+  $('#rootnode').tipsy({
+        gravity: 'w',
+        html: true,
+        title: function() {
+          console.log(herolist);
+          var firstHero = heroForRoot[0] - 1;//herolist[heroForRoot[0]]['localized_name'];
+          var secondHero = heroForRoot[1] - 1;//herolist[heroForRoot[1]]['localized_name'];
+          if (firstHero > 23) {
+            firstHero--;
+          }
+          if (firstHero > 107) {
+            firstHero--;
+          }
+          if (secondHero > 23) {
+            secondHero--;
+          }
+          if (secondHero > 107) {
+            secondHero--;
+          }
+          firstHero = herolist[firstHero]['localized_name'];
+          secondHero = herolist[secondHero]['localized_name'];
+          return 'First Hero: ' + firstHero + '</br>' + 'Second Hero: ' + secondHero;
+        }
+  })
 }
 
 function filterChanged() {
