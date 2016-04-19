@@ -1,20 +1,20 @@
-
-var twoCombo = []
-var threeCombo = []
-var hero_list = []
-var leftOffset = 850;
-var topOffset = 120;
-var barsize = 60;
-var firstImgLeftOffset = 50;
-var secondImgLeftOffset = 250;
-var firtPos = 50;
-var secPos = 150;
-var thirdPos = 250;
-var imgTopOffset = 5;
-var imagezoom = '18%';
+twoCombo = []
+threeCombo = []
+hero_list = []
+leftOffset = 850;
+topOffset = 120;
+barsize = 60;
+firstImgLeftOffset = 50;
+secondImgLeftOffset = 250;
+firtPos = 50;
+secPos = 150;
+thirdPos = 250;
+imgTopOffset = 5;
+imagezoom = '18%';
 
 //load the stats data
-var data = $.getJSON("tempt.json", function(json) {
+
+data = $.getJSON("tempt.json", function(json) {
     console.log(data); // this will show the info it in firebug console
 }).done(function(json) {
 	combos = data["responseJSON"];
@@ -23,16 +23,20 @@ var data = $.getJSON("tempt.json", function(json) {
 });
 
 //load the hero list for utility
-var datab = $.getJSON("hero_list", function(json) {
+datab = $.getJSON("hero_list", function(json) {
     console.log(datab); // this will show the info it in firebug console
 }).done(function(json) {
 	hero_list = datab["responseJSON"]["result"]["heroes"];
 });
-  // var json = require('/myData/tempt.json't);
+
+  // json = require('/myData/tempt.json't);
 
 
 function drawTwoHeroRanking() {
 	// build div if there is no div
+	// if (twoCombo[1] == undefined) {
+	// 	loadingdata();
+	// }
 	var colorID = false;
 	for (var i = 0; i < 10; i++) {
 		if (document.getElementById("rotk" + i) == null) {
