@@ -74,6 +74,7 @@ function addTooltip(circle) {
 // Draws an arc diagram for the provided undirected graph
 function drawGraph(graph) {
     d3.select('#backButton').style('display', 'none');
+    d3.select('#tablediv').style('display', 'none');
     // create svg image
     svg  = d3.select("body").select("#circle")
         .append("svg")
@@ -326,6 +327,7 @@ function drawTree() {
   for (var i = 0; i < 10; i++) {
     d3.select('#rotk' + i).style('display', 'none');
   }
+  d3.select('#tablediv').style('display', 'block');
   firstid = selectedHeroes[0]['id'];
   secondid = selectedHeroes[1]['id'];
   if (!firstid) {
@@ -353,7 +355,7 @@ function drawTree() {
   console.log(query);
   svgtree  = d3.select("body").select('#circle')
           .append("svg")
-          .attr("width", 1600)
+          .attr("width", 900)
           .attr("height", 900)
           .attr("id", "treePlotingCanvas");
   d3.json("treedata.json", function(error, data) {
@@ -421,6 +423,13 @@ function drawTreeNodes(firstid, secondid, children) {
         index = Math.floor(d['win_rate']/100 * 8);
         return treeColor[index];
       })
+      .attr('opacity', function(d, i) {
+        if (i == firstid || i == secondid) {
+          return 0;
+        } else {
+          return 1;
+        }
+      })
       //.attr('fill', 'red')
       .on('mouseover', function(d, i) {
         index = i;
@@ -450,6 +459,41 @@ function drawTreeNodes(firstid, secondid, children) {
         //somefunction(selectedHeroes);
         selectedHeroes.splice(-1, 1);
         //console.log(selectedHeroes);
+
+        var tableData = {};
+        firstHero = heroForRoot[0] - 1;
+        secondHero = heroForRoot[1] - 1;
+          if (firstHero > 23) {
+            firstHero--;
+          }
+          if (firstHero > 107) {
+            firstHero--;
+          }
+          if (secondHero > 23) {
+            secondHero--;
+          }
+          if (secondHero > 107) {
+            secondHero--;
+          }
+
+        tableData['firstid'] = heroForRoot[0];
+        tableData['secondid'] = heroForRoot[1];
+        tableData['firstname'] = herolist[firstHero]['localized_name'];
+        tableData['secondname'] = herolist[secondHero]['localized_name'];
+        tableData['thirdid'] = newHero['id'];
+        tableData['thirdname'] = newHero['name'];
+        tableData['comborate'] = d['combination_rate'];
+        tableData['winrate'] = d['win_rate'];
+
+        d3.select('#firstheroname').html(tableData['firstname']);
+        d3.select('#firstheroid').html(tableData['firstid']);
+        d3.select('#secondheroname').html(tableData['secondname']);
+        d3.select('#secondheroid').html(tableData['secondid']);
+        d3.select('#thirdheroname').html(tableData['thirdname']);
+        d3.select('#thirdheroid').html(tableData['thirdid']);
+        d3.select('#comborate').html(tableData['comborate'] + '%');
+        d3.select('#winrate').html(tableData['winrate'] + '%');
+
       });
   $('.treenode').tipsy({ 
         gravity: 'w', 

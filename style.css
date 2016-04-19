@@ -92,6 +92,9 @@ b {
     background-repeat: no-repeat;
     background-position: center;
 }*/
+.table{
+    -webkit-transform: translate(980, 0);
+}
 
 .nav-tabs{
   background-color: white;
