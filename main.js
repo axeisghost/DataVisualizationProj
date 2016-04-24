@@ -78,7 +78,7 @@ function drawGraph(graph) {
     // create svg image
     svg  = d3.select("body").select("#circle")
         .append("svg")
-        .attr("width", diameter + 200)
+        .attr("width", diameter + 400)
         .attr("height", diameter + 120)
         //.attr("align", "center")
         .attr("id", "plotingCanvas");
@@ -92,7 +92,7 @@ function drawGraph(graph) {
     // create plot area within svg image
     var plot = svg.append("g")
         .attr("id", "plot")
-        .attr("transform", "translate(" + (radius + 100) + ", " + (radius + 60) + ")");
+        .attr("transform", "translate(" + (radius + 300) + ", " + (radius + 60) + ")");
 
     // draw border around plot area
     // plot.append("circle")
@@ -322,6 +322,7 @@ function drawTree() {
     .attr('y', 40)
     .text('100%');
   d3.select('#backButton').style('display', 'block');
+  d3.select('#siders').style('display', 'none');
   svg.attr('display', 'none').transition().delay(500);
   d3.select('#tabs').style('display', 'none');
   for (var i = 0; i < 10; i++) {
@@ -357,7 +358,8 @@ function drawTree() {
           .append("svg")
           .attr("width", 900)
           .attr("height", 900)
-          .attr("id", "treePlotingCanvas");
+          .attr("id", "treePlotingCanvas")
+          .attr('transform', 'translate(400,0)');
   d3.json("treedata.json", function(error, data) {
     if (error || !data[query]) {
       var r = confirm("Sorry we have no data available for selected heroes. Click ok to refresh");
@@ -424,7 +426,15 @@ function drawTreeNodes(firstid, secondid, children) {
         return treeColor[index];
       })
       .attr('opacity', function(d, i) {
-        if (i == firstid || i == secondid) {
+        var correctedindex = i;
+        correctedindex++;
+        if (correctedindex > 23) {
+          correctedindex++;
+        }
+        if (correctedindex > 107) {
+          correctedindex++;
+        }
+        if (correctedindex == firstid || correctedindex == secondid) {
           return 0;
         } else {
           return 1;

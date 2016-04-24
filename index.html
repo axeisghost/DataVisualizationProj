@@ -25,7 +25,7 @@
 </head>
 
 <body>
-  <div align="center">
+  <div align="center" id='sliders'>
     <div>
       <label for="winRateSlider" id="winRateText"> </label>
       <input type="checkbox" id="activateWinRateFilter" onchange="filterChanged()">Disable</input>
@@ -44,7 +44,7 @@
   </div>
 
   
-  <div class="container" id='tabs'>
+  <div class="container" id='tabs' style='position:absolute; left:400px; top:80px;'>
     <ul class="nav nav-tabs" id ="myTab">
       <li><a href="javascript:drawTwoHeroRanking();" onclick="drawTwoHeroRanking()"><body>Two-heros combo win-rate ranking
   </body></a></li>
@@ -93,6 +93,7 @@
     </table>
   </div>
   </div>
+
   <div align="center" id='legend'></div>
   <div align="center" id='backButton'>
     <input name='backButton'
