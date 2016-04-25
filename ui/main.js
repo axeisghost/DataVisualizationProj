@@ -54,46 +54,7 @@ function drawTwoHeroRanking() {
 				colorID = false;
 			}
 			document.body.appendChild(current);
-			document.getElementById("rotk" + i).addEventListener('click', function(e) {
-			//add  your node links here
-				var heroes = rankingDic[i];
-				var id = d3.select(this)[0][0].id;
-				var comboNumber = id.substr(id.length - 1);
-				comboNumber = parseInt(comboNumber);
-				selectedHeroes = rankingDic[comboNumber];
-				drawTree();
-				selectedHeroes.length = 0;
-			});
-			document.getElementById("rotk" + i).addEventListener('mouseover', function(e) {
-				this.style.opacity = "0.5";
-				var heroes = rankingDic[i];
-				var id = d3.select(this)[0][0].id;
-				var comboNumber = id.substr(id.length - 1);
-				comboNumber = parseInt(comboNumber);
-				selectedHeroes = rankingDic[comboNumber];
-          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
-          		.attr("class", "tooltip hovered");
-          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
-          		.attr("class", "tooltip hovered");
-          		linksRef.style("opacity", function(d) {
-          			if (d.source.idx == selectedHeroes[0] && d.target.idx == selectedHeroes[1]) {
-          				d3.select(this).style("opacity", 1).style("stroke", "red");
-          			} else {
-            			return d3.select(this).style("opacity") * 0.3;
-            		}
-          		});
 
-			});
-			document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
-				this.style.opacity = "1";
-          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
-          		.attr("class", "tooltip unhovered");
-          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
-          		.attr("class", "tooltip unhovered");
-          		linksRef.style("opacity", function(d) {
-            		return d3.select(this).style("stroke", "#888888").style("opacity") / 0.3;
-          		});
-			});
 		}		//clear used image
 		var clearing = document.getElementById("rotk" + i);
 		while (clearing.firstChild) {
@@ -112,7 +73,9 @@ function drawTwoHeroRanking() {
 			firstHeroID--;
 			secondHeroID--;
 		}
-		rankingDic.push([firstHeroID, secondHeroID]);
+		if (rankingDicForTwo.length < 10){
+			rankingDicForTwo.push([firstHeroID, secondHeroID]);
+		}
 		//first hero
 		var firstHeroName = hero_list[firstHeroID]["name"];
 		firstHeroName = firstHeroName.substring(14, firstHeroName.length);
@@ -147,8 +110,46 @@ function drawTwoHeroRanking() {
 		img.style.height = 'auto';
 		img.src ="http://media.steampowered.com/apps/dota2/images/heroes/" + secondHeroName + "_lg.png";
 		document.getElementById("rotk" + i).appendChild(img);
-
 		//mousevents
+		document.getElementById("rotk" + i).onclick = function() {
+			//add  your node links here
+			var heroes = rankingDicForTwo[i];
+			var id = d3.select(this)[0][0].id;
+			var comboNumber = id.substr(id.length - 1);
+			comboNumber = parseInt(comboNumber);
+			selectedHeroes = rankingDicForTwo[comboNumber];
+			drawTree();
+			selectedHeroes.length = 0;
+		};
+		document.getElementById("rotk" + i).onmouseover = function() {
+			this.style.opacity = "0.5";
+			var heroes = rankingDicForTwo[i];
+			var id = d3.select(this)[0][0].id;
+			var comboNumber = id.substr(id.length - 1);
+			comboNumber = parseInt(comboNumber);
+			selectedHeroes = rankingDicForTwo[comboNumber];
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
+          	.attr("class", "tooltip hovered");
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
+          	.attr("class", "tooltip hovered");
+          	linksRef.style("opacity", function(d) {
+          		if (d.source.idx == selectedHeroes[0] && d.target.idx == selectedHeroes[1]) {
+          			d3.select(this).style("opacity", 1).style("stroke", "red");
+          		} else {
+            		return d3.select(this).style("opacity") * 0.3;
+            	}
+          	});
+		};
+		document.getElementById("rotk" + i).onmouseout = function() {
+			this.style.opacity = "1";
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
+          	.attr("class", "tooltip unhovered");
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
+          	.attr("class", "tooltip unhovered");
+          	linksRef.style("opacity", function(d) {
+            	return d3.select(this).style("stroke", "#888888").style("opacity") / 0.3;
+          	});
+		};
 	}
 }
 function drawThreeHeroRanking() {
@@ -174,23 +175,7 @@ function drawThreeHeroRanking() {
 				colorID = false;
 			}
 			document.body.appendChild(current);
-			document.getElementById("rotk" + i).addEventListener('click', function(e) {
-			//add  your node links here
-				var heroes = rankingDic[i];
-				var id = d3.select(this)[0][0].id;
-				var comboNumber = id.substr(id.length - 1);
-				comboNumber = parseInt(comboNumber);
-				selectedHeroes = rankingDic[comboNumber];
-				drawTree();
-				selectedHeroes.length = 0;
-				highlight.length = 0;
-			});
-			document.getElementById("rotk" + i).addEventListener('mouseover', function(e){
-				this.style.opacity = "0.5";
-			});
-			document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
-				this.style.opacity = "1";
-			});
+
 		}
 		//clear used image
 		var clearing = document.getElementById("rotk" + i);
@@ -214,8 +199,10 @@ function drawThreeHeroRanking() {
 			secondHeroID--;
 			thirdHeroID--;
 		}
-		rankingDic.push([firstHeroID, secondHeroID]);
-		highlight.push(thirdHeroID);
+		if (rankingDicForThree.length < 10) {
+			rankingDicForThree.push([firstHeroID, secondHeroID]);
+			highlight.push(thirdHeroID);
+		}
 		//append ranking title
 		var ranking = document.createElement("zhengxiaoliang");
 		ranking.innerHTML = i + 1;
@@ -263,6 +250,45 @@ function drawThreeHeroRanking() {
 		img.src ="http://media.steampowered.com/apps/dota2/images/heroes/" + thirdHeroName + "_lg.png";
 
 		document.getElementById("rotk" + i).appendChild(img);
-
+		document.getElementById("rotk" + i).onclick = function() {
+			//add  your node links here
+			var heroes = rankingDicForThree[i];
+			var id = d3.select(this)[0][0].id;
+			var comboNumber = id.substr(id.length - 1);
+			comboNumber = parseInt(comboNumber);
+			selectedHeroes = rankingDicForThree[comboNumber];
+			drawTree();
+			selectedHeroes.length = 0;
+			highlight.length = 0;
+		};
+		document.getElementById("rotk" + i).onmouseover = function() {
+			this.style.opacity = "0.5";
+			var heroes = rankingDicForThree[i];
+			var id = d3.select(this)[0][0].id;
+			var comboNumber = id.substr(id.length - 1);
+			comboNumber = parseInt(comboNumber);
+			selectedHeroes = rankingDicForThree[comboNumber];
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
+          	.attr("class", "tooltip hovered");
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
+          	.attr("class", "tooltip hovered");
+          	linksRef.style("opacity", function(d) {
+          		if (d.source.idx == selectedHeroes[0] && d.target.idx == selectedHeroes[1]) {
+          			d3.select(this).style("opacity", 1).style("stroke", "red");
+          		} else {
+            		return d3.select(this).style("opacity") * 0.3;
+            	}
+          	});
+		};
+		document.getElementById("rotk" + i).onmouseout = function() {
+			this.style.opacity = "1";
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
+          	.attr("class", "tooltip unhovered");
+          	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
+          	.attr("class", "tooltip unhovered");
+          	linksRef.style("opacity", function(d) {
+            	return d3.select(this).style("stroke", "#888888").style("opacity") / 0.3;
+          	});
+		};
 	}
 }
