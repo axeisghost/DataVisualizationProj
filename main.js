@@ -13,7 +13,7 @@ var nodesDataRef;
 var treenode;
 var redrawSVG = true;
 var highlight = [];
-var treeColor = ['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#006d2c','#00441b'];
+var treeColor = ['#fff5f0','#fee0d2','#fcbba1','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#a50f15','#67000d'];
 var svg;
 var svgtree;
 
@@ -397,6 +397,31 @@ function drawTreeNodes(firstid, secondid, children) {
         return r * Math.cos(alpha);
       })
     .attr('opacity', 0);
+  var axisnumber = [0.02,0.013,0.01,0.008,0.006,0.0057,0.005,0.0048,0.0046,0.0045,0,0,0];
+  for (i = 2; i < 15; i ++) {
+    var circularAxis = d3.select('#treeplot')
+          .append('circle')
+          .attr('id', 'axis' + i)
+          .attr('cx', 0)
+          .attr('cy', 0)
+          .attr('stroke', '#babdb6')
+          .attr('stroke-width', 2)
+          //.attr('stroke-opacity', 1)
+          .attr('fill-opacity', 0)
+          .attr('r', function() { return i*50; });
+    d3.select('#treeplot')
+      .append('text')
+      .attr('x', function() {
+        return i*50;
+      })
+      .attr('y', 0)
+      .text(axisnumber[i - 2] + '%');
+  }
+  d3.select('#treeplot')
+    .append('text')
+    .attr('x', 5)
+    .attr('y', 0)
+    .text('Winrate:');
   rootnode = d3.select('#treeplot')
     .append('circle')
     .attr('id', 'rootnode')
@@ -404,6 +429,7 @@ function drawTreeNodes(firstid, secondid, children) {
     .attr('cy', 0)
     .attr('r', 5)
     .attr('fill', 'steelblue');
+  
   treenode = d3.select('#treeplot').selectAll('.treenode')
       .data(childrenArr)
       .enter().append('circle')
