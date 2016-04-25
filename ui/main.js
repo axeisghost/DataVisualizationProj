@@ -64,11 +64,35 @@ function drawTwoHeroRanking() {
 				drawTree();
 				selectedHeroes.length = 0;
 			});
-			document.getElementById("rotk" + i).addEventListener('mouseover', function(e){
+			document.getElementById("rotk" + i).addEventListener('mouseover', function(e) {
 				this.style.opacity = "0.5";
+				var heroes = rankingDic[i];
+				var id = d3.select(this)[0][0].id;
+				var comboNumber = id.substr(id.length - 1);
+				comboNumber = parseInt(comboNumber);
+				selectedHeroes = rankingDic[comboNumber];
+          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
+          		.attr("class", "tooltip hovered");
+          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
+          		.attr("class", "tooltip hovered");
+          		linksRef.style("opacity", function(d) {
+          			if (d.source.idx == selectedHeroes[0] && d.target.idx == selectedHeroes[1]) {
+          				d3.select(this).style("opacity", 1).style("stroke", "red");
+          			} else {
+            			return d3.select(this).style("opacity") * 0.3;
+            		}
+          		});
+
 			});
 			document.getElementById("rotk" + i).addEventListener('mouseout', function(e) {
 				this.style.opacity = "1";
+          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
+          		.attr("class", "tooltip unhovered");
+          		d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
+          		.attr("class", "tooltip unhovered");
+          		linksRef.style("opacity", function(d) {
+            		return d3.select(this).style("stroke", "#888888").style("opacity") / 0.3;
+          		});
 			});
 		}		//clear used image
 		var clearing = document.getElementById("rotk" + i);
