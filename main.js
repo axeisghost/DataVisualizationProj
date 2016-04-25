@@ -134,15 +134,14 @@ function drawGraph(graph) {
 // Calculates node locations
 function circleLayout(nodes) {
     // sort nodes by group
-    nodes.sort(function(a, b) {
-        return a.group - b.group;
-    });
+    // nodes.sort(function(a, b) {
+    //     return a.group - b.group;
+    // });
 
     // use to scale node index to theta value
     var scale = d3.scale.linear()
         .domain([0, nodes.length])
         .range([0, 2 * Math.PI]);
-
     // calculate theta for each node
     nodes.forEach(function(d, i) {
         // calculate polar coordinates
@@ -235,6 +234,7 @@ function drawNodes(nodes) {
               }
             })
             selectedHeroes.push({name: d.name, id: d.idx});
+            console.log(d.name, d.idx);
             selectedOne = true;
           } else {
             tempRef.attr("clicked", "false");
@@ -248,7 +248,6 @@ function drawNodes(nodes) {
               }
             })
             selectedHeroes.length = 0;
-            //selectedOne = false;
           }
           if (selectedHeroes.length == 2) {
             selectedHeroes.forEach(function(each) {
@@ -294,6 +293,8 @@ function back() {
 
 
 function drawTree() {
+  d3.select("#sliders")
+    .style('display', 'none');
   console.log(highlight);
   var legend = new Array(9);
   var svglegend = d3.select('#legend').append('svg')
@@ -331,12 +332,6 @@ function drawTree() {
   d3.select('#tablediv').style('display', 'block');
   firstid = selectedHeroes[0]['id'];
   secondid = selectedHeroes[1]['id'];
-  if (!firstid) {
-    selectedHeroes.sort(function(a,b) {return a-b;});
-    firstid = selectedHeroes[0];
-    secondid = selectedHeroes[1];
-    console.log(firstid, secondid);
-  }
   firstid++;
   secondid++;
   if (firstid > 23) {

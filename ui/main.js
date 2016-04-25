@@ -14,7 +14,7 @@ var imagezoom = '18%';
 
 //load the stats data
 var data = $.getJSON("tempt.json", function(json) {
-    console.log(data); // this will show the info it in firebug console
+    //console.log(data); // this will show the info it in firebug console
 }).done(function(json) {
 	combos = data["responseJSON"];
 	twoCombo = combos["twoCombo"];
@@ -23,7 +23,7 @@ var data = $.getJSON("tempt.json", function(json) {
 
 //load the hero list for utility
 var datab = $.getJSON("hero_list", function(json) {
-    console.log(datab); // this will show the info it in firebug console
+    //console.log(datab); // this will show the info it in firebug console
 }).done(function(json) {
 	hero_list = datab["responseJSON"]["result"]["heroes"];
 });
@@ -117,7 +117,7 @@ function drawTwoHeroRanking() {
 			var id = d3.select(this)[0][0].id;
 			var comboNumber = id.substr(id.length - 1);
 			comboNumber = parseInt(comboNumber);
-			selectedHeroes = rankingDicForTwo[comboNumber];
+			selectedHeroes.push.apply(selectedHeroes, rankingDicForTwo[comboNumber]);
 			drawTree();
 			selectedHeroes.length = 0;
 		};
@@ -127,7 +127,7 @@ function drawTwoHeroRanking() {
 			var id = d3.select(this)[0][0].id;
 			var comboNumber = id.substr(id.length - 1);
 			comboNumber = parseInt(comboNumber);
-			selectedHeroes = rankingDicForTwo[comboNumber];
+			selectedHeroes.push.apply(selectedHeroes, rankingDicForTwo[comboNumber]);
           	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
           	.attr("class", "tooltip hovered");
           	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
@@ -149,6 +149,7 @@ function drawTwoHeroRanking() {
           	linksRef.style("opacity", function(d) {
             	return d3.select(this).style("stroke", "#888888").style("opacity") / 0.3;
           	});
+			selectedHeroes.length = 0;
 		};
 	}
 }
@@ -256,7 +257,7 @@ function drawThreeHeroRanking() {
 			var id = d3.select(this)[0][0].id;
 			var comboNumber = id.substr(id.length - 1);
 			comboNumber = parseInt(comboNumber);
-			selectedHeroes = rankingDicForThree[comboNumber];
+			selectedHeroes.push.apply(selectedHeroes, rankingDicForThree[comboNumber]);
 			drawTree();
 			selectedHeroes.length = 0;
 			highlight.length = 0;
@@ -267,7 +268,7 @@ function drawThreeHeroRanking() {
 			var id = d3.select(this)[0][0].id;
 			var comboNumber = id.substr(id.length - 1);
 			comboNumber = parseInt(comboNumber);
-			selectedHeroes = rankingDicForThree[comboNumber];
+			selectedHeroes.push.apply(selectedHeroes, rankingDicForThree[comboNumber]);
           	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[0])
           	.attr("class", "tooltip hovered");
           	d3.select("#plot").select("#" + "tooltip" + "nodeNo" + selectedHeroes[1])
@@ -289,6 +290,7 @@ function drawThreeHeroRanking() {
           	linksRef.style("opacity", function(d) {
             	return d3.select(this).style("stroke", "#888888").style("opacity") / 0.3;
           	});
+			selectedHeroes.length = 0;
 		};
 	}
 }
