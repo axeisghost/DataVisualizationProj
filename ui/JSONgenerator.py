@@ -8,21 +8,6 @@ combs = [];
 
 for line in rawData:
 	line = ast.literal_eval(line)
-	# if (line['first_hero_id'] > 24):
-	# 	line['first_hero_id'] = line['first_hero_id'] - 1
-	# if (line['second_hero_id'] > 24):
-	# 	line['second_hero_id'] = line['second_hero_id'] - 1
-	# if (line['third_hero_id'] > 24):
-	# 	line['third_hero_id'] = line['third_hero_id'] - 1
-	# if (line['first_hero_id'] > 107):
-	# 	line['first_hero_id'] = line['first_hero_id'] - 1
-	# if (line['second_hero_id'] > 107):
-	# 	line['second_hero_id'] = line['second_hero_id'] - 1
-	# if (line['third_hero_id'] > 107):
-	# 	line['third_hero_id'] = line['third_hero_id'] - 1
-	line['first_hero_id'] = line['first_hero_id']
-	line['second_hero_id'] = line['second_hero_id']
-	line['third_hero_id'] = line['third_hero_id']
 	if not hero_dic.has_key(line['first_hero_id']):
 		hero_dic[line['first_hero_id']] = line['first_hero']
 	if not hero_dic.has_key(line['second_hero_id']):
@@ -50,10 +35,6 @@ queue = Queue.PriorityQueue(maxsize = 10)
 rawData.close()
 outputData.write('{' + '\n')
 outputData.write('"threeCombo": [' + '\n')
-# print hero_dic[37]
-# print hero_dic[68]
-# print len(combs)
-# print len(hero_dic)
 current = combs[0]
 queue.put(combo(current["first_hero"], current["second_hero"], current['third_hero'], current["win_rate"], current["frequency"], current["game"]))
 for item in combs:
@@ -101,8 +82,8 @@ for line in rawData_b:
 	# 	line['first_hero_id'] = line['first_hero_id'] - 1
 	# if (line['second_hero_id'] > 107):
 	# 	line['second_hero_id'] = line['second_hero_id'] - 1
-	line['first_hero_id'] = line['first_hero_id']
-	line['second_hero_id'] = line['second_hero_id']
+	# line['first_hero_id'] = line['first_hero_id']
+	# line['second_hero_id'] = line['second_hero_id']
 	if not hero_dic_b.has_key(line['first_hero_id']):
 		hero_dic_b[line['first_hero_id']] = line['first_hero']
 	if not hero_dic_b.has_key(line['second_hero_id']):
@@ -137,12 +118,14 @@ for item in combs_b:
 	if item["game"] > maxx:
 		maxx = item["game"]
 	if queue.qsize() < 10:
-		queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
-	else:
-		current = queue.queue[0]
-		if current.winrate < item["win_rate"]:
-			queue.get()
+		if item['game'] >= 1000:
 			queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
+	else:
+		if item['game'] >= 1000:
+			current = queue.queue[0]
+			if current.winrate < item["win_rate"]:
+				queue.get()
+				queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
 while queue.qsize() > 0:
 	current = queue.get()
 	outputData.write('{"first_hero_id":' + str(current.firstID)

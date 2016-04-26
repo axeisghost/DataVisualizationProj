@@ -13,15 +13,15 @@
 ]
 {
 "twoCombo": [
-{"first_hero_id":85, "second_hero_id":103, "win_rate":70.9923664122, "frequency":0.0434047910937, "games":131},
-{"first_hero_id":29, "second_hero_id":44, "win_rate":52.762568442, "frequency":0.665650574865, "games":2009},
-{"first_hero_id":39, "second_hero_id":70, "win_rate":49.765258216, "frequency":0.564593618502, "games":1704},
-{"first_hero_id":39, "second_hero_id":70, "win_rate":49.765258216, "frequency":0.564593618502, "games":1704},
-{"first_hero_id":15, "second_hero_id":30, "win_rate":49.5769881557, "frequency":0.195818561347, "games":591},
-{"first_hero_id":33, "second_hero_id":41, "win_rate":48.7046632124, "frequency":0.191842549949, "games":579},
-{"first_hero_id":100, "second_hero_id":112, "win_rate":44.8412698413, "frequency":0.0834962393559, "games":252},
-{"first_hero_id":56, "second_hero_id":101, "win_rate":42.0107719928, "frequency":0.184553195719, "games":557},
-{"first_hero_id":19, "second_hero_id":91, "win_rate":40.4822335025, "frequency":0.261091415129, "games":788},
-{"first_hero_id":52, "second_hero_id":98, "win_rate":39.375, "frequency":0.0530134853053, "games":160},
+{"first_hero_id":22, "second_hero_id":102, "win_rate":67.1775223499, "frequency":0.518869487426, "games":1566},
+{"first_hero_id":22, "second_hero_id":67, "win_rate":67.5364682432, "frequency":3.65693648322, "games":11037},
+{"first_hero_id":57, "second_hero_id":70, "win_rate":68.2340647858, "frequency":0.634173817965, "games":1914},
+{"first_hero_id":18, "second_hero_id":57, "win_rate":68.2569496619, "frequency":0.882011861767, "games":2662},
+{"first_hero_id":67, "second_hero_id":70, "win_rate":68.7726358149, "frequency":0.823365693648, "games":2485},
+{"first_hero_id":57, "second_hero_id":67, "win_rate":68.8420518029, "frequency":1.30479440708, "games":3938},
+{"first_hero_id":22, "second_hero_id":36, "win_rate":68.9014084507, "frequency":1.17623670521, "games":3550},
+{"first_hero_id":22, "second_hero_id":57, "win_rate":69.0968443961, "frequency":0.913488618667, "games":2757},
+{"first_hero_id":36, "second_hero_id":67, "win_rate":69.7642163662, "frequency":1.43335210894, "games":4326},
+{"first_hero_id":36, "second_hero_id":57, "win_rate":70.2797202797, "frequency":0.473808024916, "games":1430},
 ]
 }
