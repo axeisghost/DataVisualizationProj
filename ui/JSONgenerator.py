@@ -1,28 +1,28 @@
 import ast
 import Queue
 
-rawData = open('myData/3_data', 'r')
+rawData = open('3_data', 'r')
 outputData = open('tempt', 'w')
 hero_dic = {};
 combs = [];
 
 for line in rawData:
 	line = ast.literal_eval(line)
-	if (line['first_hero_id'] > 24):
-		line['first_hero_id'] = line['first_hero_id'] - 1
-	if (line['second_hero_id'] > 24):
-		line['second_hero_id'] = line['second_hero_id'] - 1
-	if (line['third_hero_id'] > 24):
-		line['third_hero_id'] = line['third_hero_id'] - 1
-	if (line['first_hero_id'] > 107):
-		line['first_hero_id'] = line['first_hero_id'] - 1
-	if (line['second_hero_id'] > 107):
-		line['second_hero_id'] = line['second_hero_id'] - 1
-	if (line['third_hero_id'] > 107):
-		line['third_hero_id'] = line['third_hero_id'] - 1
-	line['first_hero_id'] = line['first_hero_id'] - 1
-	line['second_hero_id'] = line['second_hero_id'] - 1
-	line['third_hero_id'] = line['third_hero_id'] - 1
+	# if (line['first_hero_id'] > 24):
+	# 	line['first_hero_id'] = line['first_hero_id'] - 1
+	# if (line['second_hero_id'] > 24):
+	# 	line['second_hero_id'] = line['second_hero_id'] - 1
+	# if (line['third_hero_id'] > 24):
+	# 	line['third_hero_id'] = line['third_hero_id'] - 1
+	# if (line['first_hero_id'] > 107):
+	# 	line['first_hero_id'] = line['first_hero_id'] - 1
+	# if (line['second_hero_id'] > 107):
+	# 	line['second_hero_id'] = line['second_hero_id'] - 1
+	# if (line['third_hero_id'] > 107):
+	# 	line['third_hero_id'] = line['third_hero_id'] - 1
+	line['first_hero_id'] = line['first_hero_id']
+	line['second_hero_id'] = line['second_hero_id']
+	line['third_hero_id'] = line['third_hero_id']
 	if not hero_dic.has_key(line['first_hero_id']):
 		hero_dic[line['first_hero_id']] = line['first_hero']
 	if not hero_dic.has_key(line['second_hero_id']):
@@ -58,11 +58,11 @@ current = combs[0]
 queue.put(combo(current["first_hero"], current["second_hero"], current['third_hero'], current["win_rate"], current["frequency"], current["game"]))
 for item in combs:
 	if queue.qsize() < 10:
-		if item['game'] >= 50:
+		if item['game'] >= 20:
 			queue.put(combo(item["first_hero"], item["second_hero"], item['third_hero'], item["win_rate"], item["frequency"], current["game"]))
 	else:
 		current = queue.queue[0]
-		if item['game'] >= 50:
+		if item['game'] >= 20:
 			if current.winrate < item["win_rate"]:
 				queue.get()
 				queue.put(combo(item["first_hero"], item["second_hero"], item['third_hero'], item["win_rate"], item["frequency"], item["game"]))
@@ -87,22 +87,22 @@ outputData.write(']' + '\n')
 # 		outputData.write(',')
 # 	outputData.write('\n')
 # outputData.write(']' + '\n')
-rawData_b = open('myData/2_data', 'r')
+rawData_b = open('2_data', 'r')
 hero_dic_b = {};
 combs_b = [];
 
 for line in rawData_b:
 	line = ast.literal_eval(line)
-	if (line['first_hero_id'] > 24):
-		line['first_hero_id'] = line['first_hero_id'] - 1
-	if (line['second_hero_id'] > 24):
-		line['second_hero_id'] = line['second_hero_id'] - 1
-	if (line['first_hero_id'] > 107):
-		line['first_hero_id'] = line['first_hero_id'] - 1
-	if (line['second_hero_id'] > 107):
-		line['second_hero_id'] = line['second_hero_id'] - 1
-	line['first_hero_id'] = line['first_hero_id'] - 1
-	line['second_hero_id'] = line['second_hero_id'] - 1
+	# if (line['first_hero_id'] > 24):
+	# 	line['first_hero_id'] = line['first_hero_id'] - 1
+	# if (line['second_hero_id'] > 24):
+	# 	line['second_hero_id'] = line['second_hero_id'] - 1
+	# if (line['first_hero_id'] > 107):
+	# 	line['first_hero_id'] = line['first_hero_id'] - 1
+	# if (line['second_hero_id'] > 107):
+	# 	line['second_hero_id'] = line['second_hero_id'] - 1
+	line['first_hero_id'] = line['first_hero_id']
+	line['second_hero_id'] = line['second_hero_id']
 	if not hero_dic_b.has_key(line['first_hero_id']):
 		hero_dic_b[line['first_hero_id']] = line['first_hero']
 	if not hero_dic_b.has_key(line['second_hero_id']):
@@ -137,18 +137,16 @@ for item in combs_b:
 	if item["game"] > maxx:
 		maxx = item["game"]
 	if queue.qsize() < 10:
-		if item["game"] >= 5000:
-			queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
+		queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
 	else:
 		current = queue.queue[0]
-		if item["game"] >= 5000:
-			if current.winrate < item["win_rate"]:
-				queue.get()
-				queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
+		if current.winrate < item["win_rate"]:
+			queue.get()
+			queue.put(combo_b(item["first_hero"], item["second_hero"], item["win_rate"], item["frequency"], item["game"]))
 while queue.qsize() > 0:
 	current = queue.get()
-	outputData.write('{"first_hero_ID":' + str(current.firstID)
-		+ ', "second_hero_ID":' + str(current.secondID)
+	outputData.write('{"first_hero_id":' + str(current.firstID)
+		+ ', "second_hero_id":' + str(current.secondID)
 		+ ', "win_rate":' + str(current.winrate)
 		+ ', "frequency":' + str(current.pickrate)
 		+ ', "games":' + str(current.game)

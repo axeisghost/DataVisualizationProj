@@ -17,6 +17,7 @@ var data = $.getJSON("tempt.json", function(json) {
     //console.log(data); // this will show the info it in firebug console
 }).done(function(json) {
 	combos = data["responseJSON"];
+	console.log(combos);
 	twoCombo = combos["twoCombo"];
 	threeCombo = combos["threeCombo"];
 });
@@ -61,15 +62,15 @@ function drawTwoHeroRanking() {
 			clearing.removeChild(clearing.firstChild);
 		}
 		//dealing with heroID
-		var firstHeroID = twoCombo[i]["first_hero_id"];
-		var secondHeroID = twoCombo[i]["second_hero_id"];
+		var firstHeroID = twoCombo[9 - i]["first_hero_id"];
+		var secondHeroID = twoCombo[9 - i]["second_hero_id"];
 		firstHeroID--;
 		secondHeroID--;
-		if (firstHeroID > 24) {
+		if (firstHeroID > 23) {
 			firstHeroID--;
 			secondHeroID--;
 		}
-		if (firstHeroID > 107) {
+		if (firstHeroID > 106) {
 			firstHeroID--;
 			secondHeroID--;
 		}
@@ -193,18 +194,18 @@ function drawThreeHeroRanking() {
 			clearing.removeChild(clearing.firstChild);
 		}
 		//dealing with heroID
-		var firstHeroID = threeCombo[i]["first_hero_ID"];
-		var secondHeroID = threeCombo[i]["second_hero_ID"];
-		var thirdHeroID = threeCombo[i]["third_hero_ID"];
+		var firstHeroID = threeCombo[9 - i]["first_hero_ID"];
+		var secondHeroID = threeCombo[9 - i]["second_hero_ID"];
+		var thirdHeroID = threeCombo[9 - i]["third_hero_ID"];
 		firstHeroID--;
 		secondHeroID--;
 		thirdHeroID--;
-		if (firstHeroID > 24) {
+		if (firstHeroID > 23) {
 			firstHeroID--;
 			secondHeroID--;
 			thirdHeroID--;
 		}
-		if (firstHeroID > 107) {
+		if (firstHeroID > 106) {
 			firstHeroID--;
 			secondHeroID--;
 			thirdHeroID--;
