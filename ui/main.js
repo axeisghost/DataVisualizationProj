@@ -68,10 +68,14 @@ function drawTwoHeroRanking() {
 		secondHeroID--;
 		if (firstHeroID > 23) {
 			firstHeroID--;
+		}
+		if (firstHeroID > 107) {
+			firstHeroID--;
+		}
+		if (secondHeroID > 23) {
 			secondHeroID--;
 		}
-		if (firstHeroID > 106) {
-			firstHeroID--;
+		if (secondHeroID > 107) {
 			secondHeroID--;
 		}
 		if (rankingDicForTwo.length < 10){
@@ -202,12 +206,20 @@ function drawThreeHeroRanking() {
 		thirdHeroID--;
 		if (firstHeroID > 23) {
 			firstHeroID--;
+		}
+		if (firstHeroID > 107) {
+			firstHeroID--;
+		}
+		if (secondHeroID > 23) {
 			secondHeroID--;
+		}
+		if (secondHeroID > 107) {
+			secondHeroID--;
+		}
+		if (thirdHeroID > 23) {
 			thirdHeroID--;
 		}
-		if (firstHeroID > 106) {
-			firstHeroID--;
-			secondHeroID--;
+		if (thirdHeroID > 107) {
 			thirdHeroID--;
 		}
 		if (rankingDicForThree.length < 10) {
