@@ -1,3 +1,4 @@
+
 var pageWidth = $(window).width();
 var diameter = 600;
 var radius = diameter / 2;
@@ -16,6 +17,7 @@ var highlight = [];
 var treeColor = ['#fff5f0','#fee0d2','#fcbba1','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#a50f15','#67000d'];
 var svg;
 var svgtree;
+var sharedNodesOrder;
 
 var fisheye = d3.fisheye.circular()
     .radius(50)
@@ -26,6 +28,7 @@ var herolist;
 d3.json("herolist.json", function(data) {
     listHero(data['heroes']);
 });
+
 
 function listHero(data) {
   herolist = Object.keys(data).map(function(k) {return data[k];});
@@ -142,20 +145,28 @@ function circleLayout(nodes) {
     var scale = d3.scale.linear()
         .domain([0, nodes.length])
         .range([0, 2 * Math.PI]);
+    var nodesOrder = [];
+    for (var ind = 0; ind < nodes.length; ind++) {
+        nodesOrder.push([nodes[ind].name, ind]);
+    }
+    nodesOrder.sort(function(a,b) {
+      return a[0].localeCompare(b[0]);
+    });
     // calculate theta for each node
-    nodes.forEach(function(d, i) {
+    var radial = radius - margin;
+    sharedNodesOrder = nodesOrder;
+    nodesOrder.forEach(function(d, i) {
+        currentNode = nodes[d[1]];
         // calculate polar coordinates
         var theta  = scale(i);
-        var radial = radius - margin;
-
         // convert to cartesian coordinates
-        d.idx = i;
-        d.x = radial * Math.sin(theta);
-        d.y = radial * Math.cos(theta);
-        d.adjacentEdges = [];
-        d.adjacentNodes = [];
-        d.r = nodeR;
-        d.angle = theta;
+        currentNode.idx = d[1];
+        currentNode.x = radial * Math.sin(theta);
+        currentNode.y = radial * Math.cos(theta);
+        currentNode.adjacentEdges = [];
+        currentNode.adjacentNodes = [];
+        currentNode.r = nodeR;
+        currentNode.angle = theta;
     });
     nodesDataRef = nodes;
 }
@@ -686,3 +697,17 @@ $(function() {
 });
 
 
+// $(document).ready(function(){
+//   var selectList = $( '#fucker' );
+
+
+//   selectList.chosen({
+//       disable_search_threshold: 10
+//     });
+//   console.log(sharedNodesOrder);
+//   sharedNodesOrder.forEach(function(d) {
+//     selectList.append($("<option></option>")
+//                             .attr("value", d[1])
+//                             .text(d[0]));
+//   });
+// });

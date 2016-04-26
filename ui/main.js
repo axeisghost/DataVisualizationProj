@@ -116,8 +116,17 @@ function drawTwoHeroRanking() {
 			var heroes = rankingDicForTwo[i];
 			var id = d3.select(this)[0][0].id;
 			var comboNumber = id.substr(id.length - 1);
+			selectedHeroes.length=0;
 			comboNumber = parseInt(comboNumber);
-			selectedHeroes.push.apply(selectedHeroes, rankingDicForTwo[comboNumber]);
+			selectedHeroes.push({
+				name: nodesDataRef[rankingDicForTwo[comboNumber][0]].name,
+				id: rankingDicForTwo[comboNumber][0]
+			});
+			selectedHeroes.push({
+				name: nodesDataRef[rankingDicForTwo[comboNumber][1]].name,
+				id: rankingDicForTwo[comboNumber][1]
+			});
+			console.log(selectedHeroes);
 			drawTree();
 			selectedHeroes.length = 0;
 		};
@@ -257,7 +266,15 @@ function drawThreeHeroRanking() {
 			var id = d3.select(this)[0][0].id;
 			var comboNumber = id.substr(id.length - 1);
 			comboNumber = parseInt(comboNumber);
-			selectedHeroes.push.apply(selectedHeroes, rankingDicForThree[comboNumber]);
+			selectedHeroes.length=0;
+			selectedHeroes.push({
+				name: nodesDataRef[rankingDicForThree[comboNumber][0]].name,
+				id: rankingDicForThree[comboNumber][0]
+			});
+			selectedHeroes.push({
+				name: nodesDataRef[rankingDicForThree[comboNumber][1]].name,
+				id: rankingDicForThree[comboNumber][1]
+			});
 			drawTree();
 			selectedHeroes.length = 0;
 			highlight.length = 0;

@@ -15,17 +15,18 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript"> var rankingDicForTwo=[];var rankingDicForThree = [];var selectedHeroes = [];var highlight=[];</script>
-<script src="main.js"></script>
-<script src="ui/main.js"></script>
-<script src="tipsy.js"></script>
 <!-- CSS Style //-->
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900|Source+Code+Pro:300" rel="stylesheet" type="text/css">
 <link href="style.css" rel="stylesheet" type="text/css">
 <link href="tipsy.css" rel="stylesheet" type="text/css">
+<link href="chosen_v1.5.1/chosen.min.css" rel="stylesheet" type="text/css">
+<script src="main.js"></script>
+<script src="ui/main.js"></script>
+<script src="tipsy.js"></script>
 </head>
 
 <body>
-  <div align="center" id='sliders'>
+  <div id='sliders' style='margin-left: 300px'>
     <div>
       <label for="winRateSlider" id="winRateText"> </label>
       <input type="checkbox" id="activateWinRateFilter" onchange="filterChanged()">Disable</input>
@@ -44,7 +45,7 @@
   </div>
 
   
-  <div class="container" id='tabs' style='position:absolute; left:400px; top:20px; width:50%;'>
+  <div class="container" id='tabs' style='position:absolute; left:400px; top:80px; width:40%;'>
     <ul class="nav nav-tabs" id ="myTab">
       <li><a href="javascript:drawTwoHeroRanking();" onclick="drawTwoHeroRanking()">
         <body>Two-heros combo win-rate ranking</body>
