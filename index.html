@@ -1,0 +1,114 @@
+<!-- python -m SimpleHTTPServer 8080 //-->
+<!-- http://bl.ocks.org/mbostock/4062045 //-->
+
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>D3 Graph Visualization Demo</title>
+
+<!-- JavaScript Libraries //-->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="fisheye.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript"> var rankingDicForTwo=[];var rankingDicForThree = [];var selectedHeroes = [];var highlight=[];</script>
+<!-- CSS Style //-->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900|Source+Code+Pro:300" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
+<link href="tipsy.css" rel="stylesheet" type="text/css">
+<link href="chosen_v1.5.1/chosen.min.css" rel="stylesheet" type="text/css">
+<script src="main.js"></script>
+<script src="ui/main.js"></script>
+<script src="tipsy.js"></script>
+</head>
+
+<body>
+  <div id='sliders' style='margin-left: 300px'>
+    <div>
+      <label for="winRateSlider" id="winRateText"> </label>
+      <input type="checkbox" id="activateWinRateFilter" onchange="filterChanged()">Disable</input>
+      <br/>
+      <div id="winRateSlider" style="width: 50%">
+        
+      </div>
+    </div>
+    <div>
+      <label for="frequencySlider" id="frequencyText"> </label>
+      <input type="checkbox" id="activateFrequencyFilter" onchange="filterChanged()">Disable</input>
+      <div id="frequencySlider" style="width: 50%">
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="container" id='tabs' style='position:absolute; left:400px; top:80px; width:40%;'>
+    <ul class="nav nav-tabs" id ="myTab">
+      <li><a href="javascript:drawTwoHeroRanking();" onclick="drawTwoHeroRanking()">
+        <body>Two-heros combo win-rate ranking</body>
+        </a>
+      </li>
+      <li><a href="javascript:drawThreeHeroRanking();" onclick="drawThreeHeroRanking()">
+        <body>Three-heros combo win-rate ranking</body>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+
+  <div id="circle">
+    <div class='table' id='tablediv' style="position:absolute; left:980px; top:80px;">
+    <table id='table'>
+      <tr>
+        <td>First Hero Name: </td>
+        <td id='firstheroname'></td>
+      </tr>
+      <tr>
+        <td>First Hero ID: </td>
+        <td id='firstheroid'></td>
+      </tr>
+      <tr>
+        <td>Second Hero Name: </td>
+        <td id='secondheroname'></td>
+      </tr>
+      <tr>
+        <td>Second Hero ID: </td>
+        <td id='secondheroid'></td>
+      </tr>
+      <tr>
+        <td>Third Hero Name: </td>
+        <td id='thirdheroname'></td>
+      </tr>
+      <tr>
+        <td>Third Hero ID: </td>
+        <td id='thirdheroid'></td>
+      </tr>
+      <tr>
+        <td>Combination Rate: </td>
+        <td id='comborate'></td>
+      </tr>
+      <tr>
+        <td>Win Rate: </td>
+        <td id='winrate'></td>
+      </tr>
+    </table>
+  </div>
+  </div>
+
+  <div align="center" id='legend'></div>
+  <div align="center" id='backButton'>
+    <input name='backButton'
+           type='button'
+           value='Back'
+           onclick='back()'/>
+  </div>
+<script>
+d3.json("graphData.json", drawGraph);
+</script>
+<!-- <div id="loading"></div> -->
+</body>
+</html>
